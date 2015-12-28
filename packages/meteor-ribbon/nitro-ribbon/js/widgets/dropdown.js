@@ -1,6 +1,6 @@
-$.widget("metro.dropdown", {
+$.widget("nitro.dropdown", {
 
-    version: "3.0.0",
+    version: "1.0.0",
 
     options: {
         effect: window.METRO_SHOW_TYPE,

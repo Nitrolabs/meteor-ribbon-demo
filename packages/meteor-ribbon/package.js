@@ -13,13 +13,11 @@ Package.onUse(function(api) {
   api.use('jquery');
 
   // Compiled css
-  api.addFiles('nitro-ribbon/build/css/metro-icons.css','client');
-  api.addFiles('nitro-ribbon/build/css/metro.css','client');
+  api.addFiles('nitro-ribbon/build/css/ribbon-icons.css','client');
+  api.addFiles('nitro-ribbon/build/css/ribbon.css','client');
 
   // Compiled js
-  api.addFiles('nitro-ribbon/build/js/metro.js','client');
-
-
+  api.addFiles('nitro-ribbon/build/js/ribbon.js','client');
 
   // Static assets
   api.addAssets('nitro-ribbon/img/notebook-save.png','client');

@@ -1,13 +1,13 @@
 $.fn.reverse = Array.prototype.reverse;
 
-$.Metro = function(params){
+$.Nitro = function(params){
     params = $.extend({
     }, params);
 };
 
-$.Metro.hotkeys = [];
+$.Nitro.hotkeys = [];
 
-$.Metro.initWidgets = function(){
+$.Nitro.initWidgets = function(){
     var widgets = $("[data-role]");
 
     var hotkeys = $("[data-hotkey]");
@@ -15,14 +15,14 @@ $.Metro.initWidgets = function(){
         var element = $(this);
         var hotkey = element.data('hotkey').toLowerCase();
 
-        //if ($.Metro.hotkeys.indexOf(hotkey) > -1) {
+        //if ($.Nitro.hotkeys.indexOf(hotkey) > -1) {
         //    return;
         //}
         if (element.data('hotKeyBonded') === true ) {
             return;
         }
 
-        $.Metro.hotkeys.push(hotkey);
+        $.Nitro.hotkeys.push(hotkey);
 
         $(document).on('keyup', null, hotkey, function(e){
             if (element === undefined) return;
@@ -60,8 +60,8 @@ $.Metro.initWidgets = function(){
     });
 };
 
-$.Metro.init = function(){
-    $.Metro.initWidgets();
+$.Nitro.init = function(){
+    $.Nitro.initWidgets();
 
     if (window.METRO_AUTO_REINIT) {
         if (!window.canObserveMutation) {
@@ -74,7 +74,7 @@ $.Metro.init = function(){
                 if (originalDOM !== actualDOM) {
                     originalDOM = actualDOM;
 
-                    $.Metro.initWidgets();
+                    $.Nitro.initWidgets();
                 }
             }, 100);
         } else {
@@ -105,7 +105,7 @@ $.Metro.init = function(){
                                 var element = $(this);
                                 var hotkey = element.data('hotkey').toLowerCase();
 
-                                //if ($.Metro.hotkeys.indexOf(hotkey) > -1) {
+                                //if ($.Nitro.hotkeys.indexOf(hotkey) > -1) {
                                 //    return;
                                 //}
 
@@ -113,7 +113,7 @@ $.Metro.init = function(){
                                     return;
                                 }
 
-                                $.Metro.hotkeys.push(hotkey);
+                                $.Nitro.hotkeys.push(hotkey);
 
                                 $(document).on('keyup', null, hotkey, function () {
                                     if (element === undefined) return;
@@ -130,7 +130,7 @@ $.Metro.init = function(){
                                 });
 
                                 element.data('hotKeyBonded', true);
-                                //console.log($.Metro.hotkeys);
+                                //console.log($.Nitro.hotkeys);
                             });
 
                             if (obj.data('role') !== undefined) {

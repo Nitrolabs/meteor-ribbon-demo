@@ -4,45 +4,52 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
 
+    grunt.loadNpmTasks('grunt-contrib-handlebars');
+
     var autoprefixer = require('autoprefixer-core');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         banner: '/*!\n' +
-                ' * Metro UI CSS v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
-                ' * Copyright 2012-<%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+                ' * Nitrolabs Ribbon v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
+                ' * Copyright 2016-<%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
                 ' * Licensed under <%= pkg.license.type %> (<%= pkg.license.url %>)\n' +
                 ' */\n',
 
-        requirejs_banner: "\n(function( factory ) {\n"+
-                          "    if ( typeof define === 'function' && define.amd ) {\n" +
-                          "        define([ 'jquery' ], factory );\n"+
-                          "    } else {\n" +
-                          "        factory( jQuery );\n"+
-                          "    }\n"+
-                          "}(function( jQuery ) { \n'use strict';\n\nvar $ = jQuery;\n\n",
-
         clean: {
             build: ['build/js', 'build/css', 'build/fonts'],
-            docs: ['docs/css/metro*.css', 'docs/js/metro*.js'],
             compiled_html: ['.compiled_html']
+        },
+
+        handlebars: {
+            compile: {
+                options: {
+                    namespace: 'Ribbon.Templates'
+                },
+                files: {
+                    'build/temp/templates.js' : ['templates/ribbonHeader.html','templates/ribbonContent.html']
+                }
+            }
         },
 
         concat: {
             options: {
-                banner: '<%= banner %>' + '<%= requirejs_banner%>',
-                footer: "\n\n return $.Metro.init();\n\n}));",
+                banner: '<%= banner %>',
+                footer: "",
                 stripBanners: true,
                 process: function(src, filepath) {
                     return '// Source: ' + filepath + '\n' +
                         src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
                 }
             },
-            metro: {
+            ribbon: {
                 src: [
+                    'js/vendor/*.js',
                     'js/lib/*.js',
                     'js/utils/*.js',
-                    'js/widgets/*.js'
+                    'js/widgets/*.js',
+                    'js/templates/*.js',
+                    'build/temp/templates.js'
                 ],
                 dest: 'build/js/<%= pkg.name %>.js'
             }
@@ -55,7 +62,7 @@ module.exports = function(grunt) {
                 sourceMap: false
             },
             metro: {
-                src: '<%= concat.metro.dest %>',
+                src: '<%= concat.ribbon.dest %>',
                 dest: 'build/js/<%= pkg.name %>.min.js'
             }
         },
@@ -72,10 +79,6 @@ module.exports = function(grunt) {
             compileResponsive: {
                 src: 'less/<%= pkg.name %>-responsive.less',
                 dest: 'build/css/<%= pkg.name %>-responsive.css'
-            },
-            compileRtl: {
-                src: 'less/<%= pkg.name %>-rtl.less',
-                dest: 'build/css/<%= pkg.name %>-rtl.css'
             },
             compileSchemes: {
                 src: 'less/<%= pkg.name %>-schemes.less',
@@ -101,10 +104,6 @@ module.exports = function(grunt) {
                 src: 'build/css/<%= pkg.name %>.css',
                 dest: 'build/css/<%= pkg.name %>.min.css'
             },
-            minRtl: {
-                src: 'build/css/<%= pkg.name %>-rtl.css',
-                dest: 'build/css/<%= pkg.name %>-rtl.min.css'
-            },
             minResponsive: {
                 src: 'build/css/<%= pkg.name %>-responsive.css',
                 dest: 'build/css/<%= pkg.name %>-responsive.min.css'
@@ -128,10 +127,6 @@ module.exports = function(grunt) {
             docs_css_core: {
                 src: 'build/css/<%= pkg.name %>.css',
                 dest: 'docs/css/<%= pkg.name %>.css'
-            },
-            docs_css_rtl: {
-                src: 'build/css/<%= pkg.name %>-rtl.css',
-                dest: 'docs/css/<%= pkg.name %>-rtl.css'
             },
             docs_css_responsive: {
                 src: 'build/css/<%= pkg.name %>-responsive.css',
@@ -177,14 +172,14 @@ module.exports = function(grunt) {
 
         watch: {
             scripts: {
-                files: ['js/lib/*.js', 'js/utils/*.js', 'js/widgets/*js'],
-                tasks: ['concat', 'uglify', 'copy:docs_js']
+                files: ['templates/*.html','less/*.less','js/lib/*.js', 'js/utils/*.js', 'js/widgets/*js'],
+                tasks: ['handlebars', 'concat', 'uglify', 'copy:docs_js']
             }
         }
     });
 
     grunt.registerTask('default', [
-        'clean', 'concat', 'uglify', 'less', 'postcss', 'cssmin', 'copy', 'replace', 'watch'
+        'clean', 'handlebars', 'concat', 'uglify', 'less', 'postcss', 'cssmin', 'copy', 'replace', 'watch'
     ]);
 
 };

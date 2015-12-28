@@ -5,7 +5,7 @@ if (Meteor.isClient) {
 
 	Template.NitroRibbon.rendered = function(){
 		var a = $('.nitro-ribbon');
-		a.nribbon(config);
+		a.ribbon(config);
 
 		/*a.ribbon('folder-button').click(function(event){
 			console.log('Folder button clicked');
@@ -68,7 +68,7 @@ var config = {
 	],
 
 	tabs: {
-		home:
+		Home:
 			[
 				[
 					{
@@ -106,7 +106,13 @@ var config = {
 						type: 'mini-button',
 						name: 'image-button',
 						label: 'Calendar Next',
-						img: '/img/Calendar-Next.png'
+						img: '/img/Calendar-Next.png',
+						dropdown: [
+							"Today",
+							"Monday",
+							"Tuesday",
+							"Friday"
+						]
 					}
 				],[
 					{
@@ -128,16 +134,24 @@ var config = {
 					{
 						type: 'small-button',
 						name: 'rocket-small',
+						label: 'send',
 						glyph: 'mif-rocket'
 					},
 					{
 						type: 'small-button',
 						name: 'comments-small',
-						glyph: 'mif-comments'
+						label: 'comment',
+						glyph: 'mif-bubble',
+						dropdown: [
+							"Now",
+							"Soon",
+							"Later",
+							"Never"
+						]
 					},
 				]
 			],
-		mailing:
+		Mailing:
 			[
 				[
 					{
@@ -150,7 +164,7 @@ var config = {
 						type: 'big-button',
 						name: 'drive-button',
 						label: 'Google Drive',
-						glyph: 'mif-google-drive'
+						glyph: 'mif-drive'
 					},
 					{
 						type: 'big-button',
@@ -160,7 +174,7 @@ var config = {
 					}
 				]
 			],
-		folder:[
+		Folder:[
 			[
 				{
 					type: 'mini-button',
@@ -186,37 +200,54 @@ var config = {
 				{
 					type: 'small-button',
 					name: 'comments-small',
-					glyph: 'mif-comments'
+					glyph: 'mif-bubble'
 				}
 			]
 		],
-		view:[
+		View:[
 				[
 					{
 						type: 'small-button',
 						name: 'rocket-small',
-						glyph: 'mif-rocket'
+						label: 'diagnostics',
+						glyph: 'mif-meter'
 					},
 					{
 						type: 'small-button',
 						name: 'comments-small',
-						glyph: 'mif-comments'
+						label: 'satellite',
+						glyph: 'mif-satellite'
 					},
 				],[
 					{
 						type: 'mini-button',
 						name: 'notebook-save-image-button',
-						img: '/img/Notebook-Save.png'
+						label: 'Mini button A',
+						img: '/img/Notebook-Save.png',
+						dropdown: [
+							"Today",
+							"Monday",
+							"Tuesday",
+							"Friday"
+						]
 					},
 					{
 						type: 'mini-button',
 						name: 'folder-rename-image-button',
+						label: 'Mini button B',
 						img: '/img/Folder-Rename.png'
 					},
 					{
 						type: 'mini-button',
 						name: 'calender-next-image-button',
-						img: '/img/Calendar-Next.png'
+						label: 'Mini button C',
+						img: '/img/Calendar-Next.png',
+						dropdown: [
+							"Today",
+							"Monday",
+							"Tuesday",
+							"Friday"
+						]
 					}
 				]
 			]

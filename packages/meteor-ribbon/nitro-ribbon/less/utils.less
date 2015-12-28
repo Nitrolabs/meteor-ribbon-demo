@@ -8,45 +8,6 @@
 .pull-right,
 .pull-right-xs { float: right; }
 
-
-.dropdown-toggle {
-	position: relative;
-	cursor: pointer;
-
-	&:before {
-		display: block;
-		position: absolute;
-		vertical-align: middle;
-		color: transparent;
-		font-size: 0;
-		content: "";
-		height: 5px;
-		width: 5px;
-		background-color: @transparent ;
-		border-left: 1px solid;
-		border-bottom: 1px solid;
-		border-color: @dark;
-		top: 50%;
-		left: 100%;
-		margin-left: -1rem;
-		margin-top: -.1625rem;
-		z-index: 2;
-		.rotate(-45deg);
-	}
-
-	&.drop-marker-light {
-		&:before {
-			border-color: @white;
-		}
-	}
-}
-
-* {
-	&.dropdown-toggle {
-		padding-right: 1.625rem;
-	}
-}
-
 .flush-list {
 	padding: 0;
 	margin: 0;
