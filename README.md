@@ -9,7 +9,7 @@ by Microsoft Office for Mac OSX. The original package can be found at
 [https://github.com/NitroLabs/nitro-ribbon](https://github.com/NitroLabs/nitro-ribbon).
 
 # Meteor Package
-This demo uses the Meteor ribbon package to load Nitro Ribbon.
+This demo uses the Meteor Ribbon package to load Nitro Ribbon.
 The source code and docs for the Meteor Ribbon package can be found on github
 [https://github.com/NitroLabs/meteor-ribbon](https://github.com/NitroLabs/meteor-ribbon).
 
